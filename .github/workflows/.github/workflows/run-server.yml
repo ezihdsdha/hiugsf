@@ -1,0 +1,16 @@
+name: Minecraft Bedrock Server
+on:
+  workflow_dispatch:  # Cho phép chạy thủ công
+  schedule:
+    - cron: '0 */6 * * *'  # Tự động chạy lại mỗi 6 tiếng (tránh giới hạn)
+
+jobs:
+  run-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start Server
+        run: |
+          chmod +x start-server.sh
+          ./start-server.sh
+        timeout-minutes: 360  # Tối đa 6 tiếng
